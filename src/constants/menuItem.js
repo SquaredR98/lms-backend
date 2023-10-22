@@ -16,8 +16,8 @@ export default [
         icon: LuLayoutDashboard
       },
       {
-        name: 'Roles & Permissions',
-        url: '/users/roles-and-permissions',
+        name: 'Roles',
+        url: '/users/roles',
         icon: LuLayoutDashboard
       }
     ]

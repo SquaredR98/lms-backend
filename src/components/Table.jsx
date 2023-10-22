@@ -4,7 +4,7 @@ import { FcDeleteRow, FcEditImage } from 'react-icons/fc';
 
 export default function Table({ headers, data }) {
   return (
-    <table className="rounded-md w-full shadow-md my-10">
+    <table className="rounded-md w-full shadow-md my-2">
       <thead className="">
         <tr className="bg-blue-200">
           <th className="w-8 text-left px-4 py-2 rounded-tl-md">#</th>
