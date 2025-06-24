@@ -1,0 +1,166 @@
+{
+  "info": {
+    "_postman_id": "lms-users-api-collection",
+    "name": "LMS Users API",
+    "description": "Postman collection for all Users API endpoints in the LMS backend. Each endpoint is documented with parameters and example payloads.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create User",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"student\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/users",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users"]
+        },
+        "description": "Create a new user."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Users",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/users?search=&role=&isActive=&page=1&limit=10",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users"],
+          "query": [
+            { "key": "search", "value": "", "description": "Search term for name or email (optional)" },
+            { "key": "role", "value": "", "description": "Filter by user role (optional)" },
+            { "key": "isActive", "value": "", "description": "Filter by active status (optional)" },
+            { "key": "page", "value": "1", "description": "Page number (optional)" },
+            { "key": "limit", "value": "10", "description": "Items per page (optional)" }
+          ]
+        },
+        "description": "Get a paginated list of users with optional filters."
+      },
+      "response": []
+    },
+    {
+      "name": "Get User By ID",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/users/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users", ":id"]
+        },
+        "description": "Get a user by their ID. Replace `:id` with the user ID."
+      },
+      "response": []
+    },
+    {
+      "name": "Update User",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"firstName\": \"Jane\",\n  \"lastName\": \"Smith\",\n  \"email\": \"jane.smith@example.com\",\n  \"role\": \"teacher\",\n  \"isActive\": true\n}"
+        },
+        "url": {
+          "raw": "http://localhost:3000/users/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users", ":id"]
+        },
+        "description": "Update a user by their ID. Replace `:id` with the user ID."
+      },
+      "response": []
+    },
+    {
+      "name": "Delete User",
+      "request": {
+        "method": "DELETE",
+        "url": {
+          "raw": "http://localhost:3000/users/:id",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users", ":id"]
+        },
+        "description": "Delete a user by their ID. Replace `:id` with the user ID."
+      },
+      "response": []
+    },
+    {
+      "name": "Activate User",
+      "request": {
+        "method": "PUT",
+        "url": {
+          "raw": "http://localhost:3000/users/:id/activate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users", ":id", "activate"]
+        },
+        "description": "Activate a user by their ID. Replace `:id` with the user ID."
+      },
+      "response": []
+    },
+    {
+      "name": "Deactivate User",
+      "request": {
+        "method": "PUT",
+        "url": {
+          "raw": "http://localhost:3000/users/:id/deactivate",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users", ":id", "deactivate"]
+        },
+        "description": "Deactivate a user by their ID. Replace `:id` with the user ID."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Active Users Count",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/users/stats/active-count",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users", "stats", "active-count"]
+        },
+        "description": "Get the count of active users."
+      },
+      "response": []
+    },
+    {
+      "name": "Get Inactive Users Count",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "http://localhost:3000/users/stats/inactive-count",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "3000",
+          "path": ["users", "stats", "inactive-count"]
+        },
+        "description": "Get the count of inactive users."
+      },
+      "response": []
+    }
+  ]
+} 

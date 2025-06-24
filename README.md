@@ -21,9 +21,92 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-# LMS Backend
+# LMS Backend (NestJS, TypeORM, Modular, RBAC/ABAC)
 
-A Learning Management System backend built with NestJS, TypeORM, and PostgreSQL.
+## Project Overview
+This project is a modular, scalable backend for a Learning Management System (LMS), inspired by Moodle, built with [NestJS](https://nestjs.com/) and [TypeORM](https://typeorm.io/). It is designed for enterprise-grade extensibility, security, and maintainability.
+
+## Key Features
+- **Modular Architecture:** All features (users, courses, etc.) are implemented as independent modules under `src/modules`.
+- **Strict Data Layer:** All database entities and repositories are encapsulated in `src/database/entities/<table>`, never exposed directly to services or controllers.
+- **RBAC & ABAC:** Role-Based and Attribute-Based Access Control, with context-aware permissions and policies.
+- **Screen/Feature Access:** Fine-grained control over which users can access which screens/features, mapped to permissions.
+- **Migration-Ready:** All schema changes are managed via TypeORM migrations.
+- **No Swagger:** The project is currently Swagger/OpenAPI free for maximum compatibility and clean startup.
+
+## Architecture
+
+```
+src/
+├── app.module.ts
+├── main.ts
+├── database/
+│   └── entities/
+│       ├── users/
+│       │   ├── entity.ts
+│       │   └── repository.ts
+│       ├── roles/
+│       ├── permissions/
+│       ├── ...
+│   └── database.module.ts
+├── modules/
+│   └── users/
+│       ├── users.controller.ts
+│       ├── users.service.ts
+│       └── users.module.ts
+│   └── ...
+```
+
+- **Entities/Repositories:** Only repositories interact with entities. Services use repositories, not entities.
+- **Modules:** Each feature (users, courses, etc.) is a self-contained module.
+
+## RBAC/ABAC Schema
+- **users:** User accounts
+- **roles:** Roles (admin, teacher, student, ...)
+- **permissions:** Fine-grained permissions/capabilities
+- **role_permissions:** Which permissions are granted to which roles
+- **user_roles:** Which roles are assigned to which users (optionally per context)
+- **contexts:** Contexts (system, course, module, ...)
+- **attributes:** Attribute definitions for ABAC
+- **user_attributes:** User-specific attribute values
+- **policies:** ABAC policies (attribute-based rules)
+- **screens:** Screens/features in the LMS
+- **screen_permissions:** Map screens to permissions
+
+## API Structure (Current Example: Users)
+
+### Users Endpoints
+- `POST /users` — Create a new user
+- `GET /users` — List users (with filters)
+- `GET /users/:id` — Get user by ID
+- `PUT /users/:id` — Update user
+- `DELETE /users/:id` — Delete user
+- `PUT /users/:id/activate` — Activate user
+- `PUT /users/:id/deactivate` — Deactivate user
+- `GET /users/stats/active-count` — Count of active users
+- `GET /users/stats/inactive-count` — Count of inactive users
+
+> **Note:** All endpoints are protected by the service/repository pattern. No direct entity access in controllers/services.
+
+## How We Got Here
+- **Initial Setup:** Started with a clean NestJS project, added TypeORM, PostgreSQL, and modular structure.
+- **Strict Data Layer:** Moved all entities and repositories to their own folders, enforced repository-only access.
+- **RBAC/ABAC Schema:** Designed and implemented a scalable, context-aware schema for roles, permissions, attributes, and policies.
+- **Screen Access:** Added tables and logic for mapping permissions to screens/features.
+- **Swagger Removal:** Removed all Swagger/OpenAPI code and dependencies for a clean, error-free build.
+- **Absolute Imports:** Configured `tsconfig.json` for `@database` and `@modules` aliases for clean, maintainable imports.
+
+## Next Steps
+- Implement the RBAC/ABAC engine (service/guard logic)
+- Add more modules (courses, enrollments, etc.)
+- Add migrations and seeders for initial data
+- (Optional) Reintroduce API documentation with a compatible tool if needed
+
+## Contributing
+- Fork, branch, and PR as usual. Follow the modular and strict data layer patterns.
+
+## License
+MIT (or your preferred license)
 
 ## Features
 

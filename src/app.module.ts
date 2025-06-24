@@ -3,6 +3,9 @@ import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
+// Removed UsersModule import because 'users.module.ts' is not a module.
+import { AuthModule } from './modules/auth/auth.module';
+import { AuditLogModule } from './modules/audit-log/audit-log.module';
 
 @Module({
   imports: [
@@ -11,7 +14,8 @@ import { DatabaseModule } from './database/database.module';
       envFilePath: '.env',
     }),
     DatabaseModule,
-    // UsersModule is not imported or defined, so remove or import it if needed
+    AuthModule,
+    AuditLogModule,
   ],
   controllers: [AppController],
   providers: [AppService],
